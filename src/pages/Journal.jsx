@@ -1,10 +1,10 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Sparkles, Calendar, Clock, ChevronRight, AlertCircle } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import Navbar from '../components/Navbar';
-import Button from '../components/Button';
-import GlassCard from '../components/GlassCard';
-import { journalAPI } from '../api';
+import Navbar from '../components/Navbar.jsx';
+import Button from '../components/Button.jsx';
+import GlassCard from '../components/GlassCard.jsx';
+import { journalAPI } from '../api/index.js';
 
 const Journal = () => {
   const [content, setContent] = useState('');
@@ -18,7 +18,7 @@ const Journal = () => {
     setError('');
     
     try {
-      // 1. Get AI Analysis
+      // 1. Get AI Analysis (Mocked but now includes clarity/energy)
       const { data: analysis } = await journalAPI.analyze(content);
       setFeedback(analysis);
 
@@ -26,7 +26,9 @@ const Journal = () => {
       await journalAPI.createEntry({
         content,
         sentiment: analysis.sentiment,
-        insight: analysis.insight
+        insight: analysis.insight,
+        clarity: analysis.clarity,
+        energy: analysis.energy
       });
     } catch (err) {
       setError('Failed to process reflection. Please try again.');

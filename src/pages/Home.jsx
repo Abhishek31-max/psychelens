@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { Sparkles, Brain, Shield, ArrowRight } from 'lucide-react';
-import Navbar from '../components/Navbar';
-import Button from '../components/Button';
-import GlassCard from '../components/GlassCard';
+import Navbar from '../components/Navbar.jsx';
+import Button from '../components/Button.jsx';
+import GlassCard from '../components/GlassCard.jsx';
 
 const Home = () => {
   const features = [

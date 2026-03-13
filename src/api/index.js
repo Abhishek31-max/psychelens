@@ -19,8 +19,14 @@ export const authAPI = {
 
 export const journalAPI = {
   getEntries: () => api.get('/journal'),
+  getAnalysis: () => api.get('/journal?type=analysis'),
   createEntry: (data) => api.post('/journal', data),
-  analyze: (content) => api.post('/journal/analyze', { content })
+  analyze: (content) => {
+    // Simulated AI logic for clarity/energy
+    const clarity = Math.floor(Math.random() * 40) + 60; // 60-100
+    const energy = Math.floor(Math.random() * 50) + 30;  // 30-80
+    return api.post('/journal/analyze', { content, clarity, energy });
+  }
 };
 
 export default api;

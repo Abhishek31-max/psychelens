@@ -12,6 +12,8 @@ const JournalEntrySchema = new mongoose.Schema({
   content: { type: String, required: true },
   sentiment: { type: String },
   insight: { type: String },
+  clarity: { type: Number, default: 50 },
+  energy: { type: Number, default: 50 },
   date: { type: Date, default: Date.now }
 });
 

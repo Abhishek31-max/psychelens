@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Camera, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Button from './Button.jsx';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);

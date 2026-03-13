@@ -2,10 +2,10 @@ import { motion } from 'framer-motion';
 import { Plus, Book, TrendingUp, Calendar, ArrowRight, Activity, LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import Navbar from '../components/Navbar';
-import Button from '../components/Button';
-import GlassCard from '../components/GlassCard';
-import { journalAPI } from '../api';
+import Navbar from '../components/Navbar.jsx';
+import Button from '../components/Button.jsx';
+import GlassCard from '../components/GlassCard.jsx';
+import { journalAPI } from '../api/index.js';
 
 const Dashboard = () => {
   const navigate = useNavigate();

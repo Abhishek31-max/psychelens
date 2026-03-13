@@ -2,10 +2,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Lock, User, ArrowRight, Sparkles, AlertCircle } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '../components/Button';
-import GlassCard from '../components/GlassCard';
-import Navbar from '../components/Navbar';
-import { authAPI } from '../api';
+import Button from '../components/Button.jsx';
+import GlassCard from '../components/GlassCard.jsx';
+import Navbar from '../components/Navbar.jsx';
+import { authAPI } from '../api/index.js';
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);

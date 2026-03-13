@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Auth from './pages/Auth';
-import Journal from './pages/Journal';
-import Dashboard from './pages/Dashboard';
-import Analysis from './pages/Analysis';
+import Home from './pages/Home.jsx';
+import Auth from './pages/Auth.jsx';
+import Journal from './pages/Journal.jsx';
+import Dashboard from './pages/Dashboard.jsx';
+import Analysis from './pages/Analysis.jsx';
 
 function App() {
   return (

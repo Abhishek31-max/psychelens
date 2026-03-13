@@ -1,19 +1,29 @@
 import { motion } from 'framer-motion';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Sparkles, Brain, Cloud, Sun, Map } from 'lucide-react';
-import Navbar from '../components/Navbar';
-import GlassCard from '../components/GlassCard';
+import { useState, useEffect } from 'react';
+import Navbar from '../components/Navbar.jsx';
+import GlassCard from '../components/GlassCard.jsx';
+import { journalAPI } from '../api/index.js';
 
 const Analysis = () => {
-  const data = [
-    { name: 'Mon', clarity: 65, energy: 40 },
-    { name: 'Tue', clarity: 55, energy: 60 },
-    { name: 'Wed', clarity: 75, energy: 30 },
-    { name: 'Thu', clarity: 80, energy: 70 },
-    { name: 'Fri', clarity: 60, energy: 85 },
-    { name: 'Sat', clarity: 90, energy: 50 },
-    { name: 'Sun', clarity: 85, energy: 45 },
-  ];
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchAnalysis();
+  }, []);
+
+  const fetchAnalysis = async () => {
+    try {
+      const { data: analysisData } = await journalAPI.getAnalysis();
+      setData(analysisData);
+    } catch (err) {
+      console.error('Failed to fetch analysis', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const themes = [
     { title: "Career Growth", weight: 80, color: "bg-sage-800" },
@@ -38,9 +48,12 @@ const Analysis = () => {
             <h2 className="text-xl font-bold text-sage-800 mb-8 flex items-center gap-2">
               <Sun className="text-sage-500" /> Clarity & Energy Trends
             </h2>
-            <div className="flex-1 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={data}>
+            <div className="flex-1 w-full flex items-center justify-center">
+              {loading ? (
+                <p className="text-sage-400 animate-pulse">Analyzing landscapes...</p>
+              ) : data.length > 0 ? (
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={data}>
                   <defs>
                     <linearGradient id="colorClarity" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#4c5e4c" stopOpacity={0.3}/>
@@ -79,6 +92,9 @@ const Analysis = () => {
                   />
                 </AreaChart>
               </ResponsiveContainer>
+              ) : (
+                <p className="text-sage-400 text-center italic">Insufficient data for rhythmic mapping. Keep reflecting.</p>
+              )}
             </div>
           </GlassCard>
 
