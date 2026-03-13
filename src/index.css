@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+:root {
+  /* Sage Aesthetic Color Palette (HSL) */
+  --sage-50: 100, 40%, 98%;
+  --sage-100: 100, 30%, 94%;
+  --sage-200: 100, 25%, 88%;
+  --sage-300: 100, 20%, 78%;
+  --sage-400: 100, 15%, 65%;
+  --sage-500: 100, 12%, 50%;
+  --sage-600: 100, 15%, 40%;
+  --sage-700: 100, 18%, 32%;
+  --sage-800: 100, 20%, 24%;
+  --sage-900: 100, 25%, 15%;
+
+  --accent-gold: 45, 100%, 75%;
+  --accent-lavender: 260, 40%, 85%;
+  
+  --bg-primary: hsl(var(--sage-50));
+  --text-primary: hsl(var(--sage-900));
+  --text-secondary: hsl(var(--sage-600));
+  
+  --glass-bg: hsla(var(--sage-100), 0.6);
+  --glass-border: hsla(var(--sage-200), 0.8);
+  --glass-shadow: 0 8px 32px 0 rgba(100, 120, 100, 0.1);
+}
+
+@theme {
+  --color-sage-50: hsl(var(--sage-50));
+  --color-sage-100: hsl(var(--sage-100));
+  --color-sage-200: hsl(var(--sage-200));
+  --color-sage-300: hsl(var(--sage-300));
+  --color-sage-400: hsl(var(--sage-400));
+  --color-sage-500: hsl(var(--sage-500));
+  --color-sage-600: hsl(var(--sage-600));
+  --color-sage-700: hsl(var(--sage-700));
+  --color-sage-800: hsl(var(--sage-800));
+  --color-sage-900: hsl(var(--sage-900));
+  
+  --font-plus-jakarta: "Plus Jakarta Sans", sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-plus-jakarta);
+    transition: background-color 0.5s ease;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  .glass-dark {
+    background: hsla(var(--sage-900), 0.05);
+    backdrop-filter: blur(8px);
+    border: 1px solid hsla(var(--sage-800), 0.1);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-sage-800 to-sage-500;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
