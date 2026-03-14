@@ -1,5 +1,5 @@
-import connectDB from '../utils/db';
-import { User } from '../utils/models';
+import connectDB from '../utils/db.js';
+import { User } from '../utils/models.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 

@@ -1,5 +1,5 @@
-import connectDB from '../utils/db';
-import { JournalEntry } from '../utils/models';
+import connectDB from '../utils/db.js';
+import { JournalEntry } from '../utils/models.js';
 import jwt from 'jsonwebtoken';
 
 export default async function handler(req, res) {
