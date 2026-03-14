@@ -1,23 +1,51 @@
 import { motion } from 'framer-motion';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, Component } from 'react';
 import { Sparkles, Brain, Cloud, Sun, Map } from 'lucide-react';
-import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar.jsx';
 import GlassCard from '../components/GlassCard.jsx';
 import { journalAPI } from '../api/index.js';
 
+// Simple Error Boundary for Chart
+class ChartErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() { return { hasError: true }; }
+  componentDidCatch(error, errorInfo) { console.error("Chart Crash:", error, errorInfo); }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="h-full w-full flex items-center justify-center p-8 text-center bg-red-50/50 rounded-2xl border border-red-100">
+          <p className="text-red-600 font-medium">The visualization engine encountered an error. Please refresh or try again later.</p>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 const Analysis = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (!storedUser) {
+      navigate('/auth');
+      return;
+    }
     fetchAnalysis();
-  }, []);
+  }, [navigate]);
 
   const fetchAnalysis = async () => {
     try {
       const { data: analysisData } = await journalAPI.getAnalysis();
-      setData(analysisData);
+      // Ensure data is an array
+      setData(Array.isArray(analysisData) ? analysisData : []);
     } catch (err) {
       console.error('Failed to fetch analysis', err);
     } finally {
@@ -48,52 +76,58 @@ const Analysis = () => {
             <h2 className="text-xl font-bold text-sage-800 mb-8 flex items-center gap-2">
               <Sun className="text-sage-500" /> Clarity & Energy Trends
             </h2>
-            <div className="flex-1 w-full flex items-center justify-center">
+            <div className="flex-1 w-full relative" style={{ minHeight: '400px' }}>
               {loading ? (
-                <p className="text-sage-400 animate-pulse">Analyzing landscapes...</p>
+                <div className="h-full w-full flex items-center justify-center">
+                  <p className="text-sage-400 animate-pulse">Analyzing landscapes...</p>
+                </div>
               ) : data.length > 0 ? (
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={data}>
-                  <defs>
-                    <linearGradient id="colorClarity" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#4c5e4c" stopOpacity={0.3}/>
-                      <stop offset="95%" stopColor="#4c5e4c" stopOpacity={0}/>
-                    </linearGradient>
-                    <linearGradient id="colorEnergy" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#8d9b8d" stopOpacity={0.3}/>
-                      <stop offset="95%" stopColor="#8d9b8d" stopOpacity={0}/>
-                    </linearGradient>
-                  </defs>
-                  <Tooltip 
-                    contentStyle={{ 
-                      backgroundColor: 'rgba(255, 255, 255, 0.8)', 
-                      borderRadius: '16px', 
-                      border: '1px solid #e5e7eb',
-                      backdropFilter: 'blur(8px)'
-                    }} 
-                  />
-                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#6b7280'}} />
-                  <Area 
-                    type="monotone" 
-                    dataKey="clarity" 
-                    stroke="#4c5e4c" 
-                    strokeWidth={3}
-                    fillOpacity={1} 
-                    fill="url(#colorClarity)" 
-                  />
-                  <Area 
-                    type="monotone" 
-                    dataKey="energy" 
-                    stroke="#8d9b8d" 
-                    strokeWidth={2}
-                    fillOpacity={1} 
-                    fill="url(#colorEnergy)" 
-                    strokeDasharray="5 5"
-                  />
-                </AreaChart>
-              </ResponsiveContainer>
+                <ChartErrorBoundary>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                      <defs>
+                        <linearGradient id="colorClarity" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="#4c5e4c" stopOpacity={0.3}/>
+                          <stop offset="95%" stopColor="#4c5e4c" stopOpacity={0}/>
+                        </linearGradient>
+                        <linearGradient id="colorEnergy" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="#8d9b8d" stopOpacity={0.3}/>
+                          <stop offset="95%" stopColor="#8d9b8d" stopOpacity={0}/>
+                        </linearGradient>
+                      </defs>
+                      <Tooltip 
+                        contentStyle={{ 
+                          backgroundColor: 'rgba(255, 255, 255, 0.8)', 
+                          borderRadius: '16px', 
+                          border: '1px solid #e5e7eb',
+                          backdropFilter: 'blur(8px)'
+                        }} 
+                      />
+                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#6b7280'}} />
+                      <Area 
+                        type="monotone" 
+                        dataKey="clarity" 
+                        stroke="#4c5e4c" 
+                        strokeWidth={3}
+                        fillOpacity={1} 
+                        fill="url(#colorClarity)" 
+                      />
+                      <Area 
+                        type="monotone" 
+                        dataKey="energy" 
+                        stroke="#8d9b8d" 
+                        strokeWidth={2}
+                        fillOpacity={1} 
+                        fill="url(#colorEnergy)" 
+                        strokeDasharray="5 5"
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </ChartErrorBoundary>
               ) : (
-                <p className="text-sage-400 text-center italic">Insufficient data for rhythmic mapping. Keep reflecting.</p>
+                <div className="h-full w-full flex items-center justify-center">
+                  <p className="text-sage-400 text-center italic">Insufficient data for rhythmic mapping. Keep reflecting.</p>
+                </div>
               )}
             </div>
           </GlassCard>

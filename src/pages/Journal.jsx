@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Sparkles, Calendar, Clock, ChevronRight, AlertCircle } from 'lucide-react';
+import { Send, Sparkles, Calendar, Clock, ChevronRight, AlertCircle, Brain } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar.jsx';
 import Button from '../components/Button.jsx';
@@ -62,7 +62,7 @@ const Journal = () => {
             </div>
           )}
 
-          <GlassCard className="min-h-[500px] flex flex-col p-8 border-sage-200/50 bg-white/40">
+          <GlassCard className="min-h-[500px] h-full flex flex-col p-8 border-sage-200/50 bg-white/40">
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
