@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '/api'
+  baseURL: 'https://psychelens-fullstack.onrender.com/api'
 });
 
 api.interceptors.request.use((config) => {
