@@ -11,6 +11,10 @@ export default async function handler(req, res) {
   }
 
   try {
+    if (!process.env.JWT_SECRET) {
+      throw new Error('JWT_SECRET is not defined');
+    }
+
     jwt.verify(token, process.env.JWT_SECRET);
     const { content } = req.body;
 
