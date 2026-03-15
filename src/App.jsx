@@ -5,7 +5,6 @@ import Auth from './pages/Auth.jsx';
 import Journal from './pages/Journal.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import Analysis from './pages/Analysis.jsx';
-import CustomCursor from './components/CustomCursor.jsx';
 import AmbientBackground from './components/AmbientBackground.jsx';
 
 const AnimatedRoutes = () => {
@@ -26,7 +25,6 @@ const AnimatedRoutes = () => {
 function App() {
   return (
     <Router>
-      <CustomCursor />
       <AmbientBackground />
       <AnimatedRoutes />
     </Router>
