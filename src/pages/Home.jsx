@@ -44,49 +44,57 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-5xl md:text-7xl font-bold tracking-tight text-sage-900 mb-6 leading-tight"
+            className="text-6xl md:text-8xl font-display tracking-tight text-sage-900 mb-8 leading-tight"
           >
             Reflect, Understand, <br />
-            <span className="text-gradient">Evolve with AI.</span>
+            <span className="text-gradient italic font-serif">Deepen Clarity.</span>
           </motion.h1>
           
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg md:text-xl text-sage-600 max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="text-xl md:text-2xl font-serif italic text-sage-600 max-w-2xl mx-auto mb-12 leading-relaxed opacity-80"
           >
-            The world's first AI-powered neural journal that translates your thoughts 
-            into visual patterns of growth and emotional intelligence.
+            A neural bridge between your thoughts and psychological growth.
           </motion.p>
           
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-6"
           >
-            <Button className="h-14 px-8 text-lg">
-              Start Free Trial <ArrowRight size={20} />
+            <Button className="h-16 px-10 text-xl rounded-2xl shadow-2xl shadow-sage-900/20">
+              Begin Journey <ArrowRight size={20} />
             </Button>
-            <Button variant="secondary" className="h-14 px-8 text-lg">
-              View Demo
+            <Button variant="secondary" className="h-16 px-10 text-xl rounded-2xl">
+              Explore Calm
             </Button>
           </motion.div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-6">
+      <section className="py-32 px-6 relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-center mb-20"
+          >
+            <h2 className="text-4xl font-display text-sage-900 mb-4">The Pillars of Insight</h2>
+            <p className="text-sage-500 font-serif italic">Tools designed for the evolving mind.</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {features.map((feature, index) => (
-              <GlassCard key={index} delay={0.2 * index} className="text-center group hover:border-sage-300 transition-colors">
-                <div className="w-16 h-16 rounded-2xl bg-white/50 flex items-center justify-center mx-auto mb-6 group-hover:bg-sage-100 transition-colors">
+              <GlassCard key={index} delay={0.2 * index} className="text-center p-10 group hover:border-sage-300 transition-all hover:-translate-y-2">
+                <div className="w-20 h-20 rounded-3xl bg-white/60 flex items-center justify-center mx-auto mb-8 group-hover:bg-sage-100 transition-colors shadow-sm">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-bold text-sage-900 mb-3">{feature.title}</h3>
-                <p className="text-sage-600 leading-relaxed">
+                <h3 className="text-2xl font-display text-sage-900 mb-4">{feature.title}</h3>
+                <p className="text-sage-600 leading-relaxed font-sans opacity-80">
                   {feature.description}
                 </p>
               </GlassCard>

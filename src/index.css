@@ -8,10 +8,10 @@
   --sage-300: 100, 20%, 78%;
   --sage-400: 100, 15%, 65%;
   --sage-500: 100, 12%, 50%;
-  --sage-600: 100, 15%, 40%;
-  --sage-700: 100, 18%, 32%;
-  --sage-800: 100, 20%, 24%;
-  --sage-900: 100, 25%, 15%;
+  --sage-600: 100, 18%, 38%;
+  --sage-700: 100, 22%, 28%;
+  --sage-800: 100, 25%, 18%;
+  --sage-900: 100, 30%, 12%;
 
   --accent-gold: 45, 100%, 75%;
   --accent-lavender: 260, 40%, 85%;
@@ -20,9 +20,13 @@
   --text-primary: hsl(var(--sage-900));
   --text-secondary: hsl(var(--sage-600));
   
-  --glass-bg: hsla(var(--sage-100), 0.6);
-  --glass-border: hsla(var(--sage-200), 0.8);
-  --glass-shadow: 0 8px 32px 0 rgba(100, 120, 100, 0.1);
+  --glass-bg: hsla(var(--sage-100), 0.7);
+  --glass-border: hsla(var(--sage-200), 0.9);
+  --glass-shadow: 0 12px 40px 0 rgba(100, 120, 100, 0.12);
+
+  --font-serif: 'Playfair Display', serif;
+  --font-display: 'DM Serif Display', serif;
+  --font-sans: 'Inter', sans-serif;
 }
 
 @theme {
@@ -37,7 +41,9 @@
   --color-sage-800: hsl(var(--sage-800));
   --color-sage-900: hsl(var(--sage-900));
   
-  --font-plus-jakarta: "Plus Jakarta Sans", sans-serif;
+  --font-serif: var(--font-serif);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
 }
 
 @layer base {
