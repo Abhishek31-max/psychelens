@@ -43,34 +43,33 @@ const BreathingMode = ({ isOpen, onClose }) => {
             <X size={32} />
           </button>
 
-          <div className="text-center max-w-md w-full">
+          <div className="text-center max-w-sm w-full">
             <motion.div
-              initial={{ scale: 0.8 }}
               animate={{ 
-                scale: phase === 'Inhale' ? 1.5 : phase === 'Exhale' ? 0.8 : 1.5,
-                opacity: [0.3, 0.6, 0.3]
+                scale: phase === 'Inhale' ? 1.2 : phase === 'Exhale' ? 0.9 : 1.2,
+                opacity: [0.3, 0.5, 0.3]
               }}
               transition={{ 
                 duration: 4, 
                 ease: "easeInOut",
                 repeat: Infinity 
               }}
-              className="w-64 h-64 mx-auto rounded-full bg-sage-300/30 flex items-center justify-center mb-12 shadow-[0_0_100px_rgba(100,200,100,0.2)]"
+              className="w-48 h-48 mx-auto rounded-full bg-sage-300/20 flex items-center justify-center mb-10"
             >
-               <Wind size={48} className="text-sage-600" />
+               <Wind size={40} className="text-sage-500" />
             </motion.div>
 
             <motion.h2 
               key={phase}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-5xl font-display text-sage-900 mb-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-3xl font-bold text-sage-800 mb-2 uppercase tracking-widest"
             >
               {phase}
             </motion.h2>
-            <p className="text-2xl font-sans text-sage-500">{count}</p>
+            <p className="text-xl font-medium text-sage-400">{count}</p>
             
-            <p className="mt-12 text-sage-400 italic">Focus on the expansion and contraction. Let everything else fade away.</p>
+            <p className="mt-10 text-sage-400 text-sm">Focus on your breath. Be present.</p>
           </div>
         </motion.div>
       )}

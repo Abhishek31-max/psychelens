@@ -63,31 +63,31 @@ const Analysis = () => {
     <div className="min-h-screen bg-sage-50/50 flex flex-col pt-16 font-sans">
       <Navbar />
 
-      <main className="flex-1 max-w-7xl mx-auto w-full px-8 py-12">
-        <header className="mb-16">
-          <h1 className="text-5xl font-display text-sage-900 tracking-tight leading-tight mb-4">
-            Emotional <span className="italic font-serif">Rhythms</span>
+      <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-12">
+        <header className="mb-12">
+          <h1 className="text-4xl font-bold text-sage-900 tracking-tight mb-2">
+            Evolution <span className="text-sage-400">&</span> Trends
           </h1>
-          <p className="text-sage-500 font-serif italic text-xl opacity-80">Uncovering the geometric patterns of your psyche.</p>
+          <p className="text-sage-500 font-medium text-lg">Visualizing the patterns of your emotional journey.</p>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           {/* Main Chart */}
-          <GlassCard className="lg:col-span-2 p-10 h-[550px] flex flex-col group">
-            <div className="flex items-center justify-between mb-10">
-              <h2 className="text-2xl font-display text-sage-900 flex items-center gap-3">
-                <Sun className="text-sage-400" size={24} /> Clarity & Energy Trends
+          <GlassCard className="lg:col-span-2 p-8 h-[500px] flex flex-col group">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-xl font-bold text-sage-900 flex items-center gap-3">
+                <Sun className="text-sage-400" size={20} /> Clarity & Energy
               </h2>
               <div className="flex items-center gap-6 text-[10px] font-bold uppercase tracking-widest text-sage-400">
-                <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-sage-800" /> Clarity</div>
-                <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-sage-400" /> Energy</div>
+                <div className="flex items-center gap-2"><div className="w-2.5 h-2.5 rounded-full bg-sage-800" /> Clarity</div>
+                <div className="flex items-center gap-2"><div className="w-2.5 h-2.5 rounded-full bg-sage-400" /> Energy</div>
               </div>
             </div>
             
             <div className="flex-1 w-full relative">
               {loading ? (
                 <div className="h-full w-full flex items-center justify-center">
-                  <div className="w-12 h-12 border-4 border-sage-200 border-t-sage-800 rounded-full animate-spin" />
+                  <div className="w-10 h-10 border-4 border-sage-100 border-t-sage-600 rounded-full animate-spin" />
                 </div>
               ) : data.length > 0 ? (
                 <ChartErrorBoundary>
@@ -95,52 +95,47 @@ const Analysis = () => {
                     <AreaChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                       <defs>
                         <linearGradient id="colorClarity" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#2c3422" stopOpacity={0.15}/>
-                          <stop offset="95%" stopColor="#2c3422" stopOpacity={0}/>
-                        </linearGradient>
-                        <linearGradient id="colorEnergy" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#8d9484" stopOpacity={0.1}/>
-                          <stop offset="95%" stopColor="#8d9484" stopOpacity={0}/>
+                          <stop offset="5%" stopColor="#3a4541" stopOpacity={0.1}/>
+                          <stop offset="95%" stopColor="#3a4541" stopOpacity={0}/>
                         </linearGradient>
                       </defs>
-                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e4e6e0" />
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f2f0" />
                       <Tooltip 
                         contentStyle={{ 
                           backgroundColor: 'white', 
-                          borderRadius: '20px', 
-                          border: 'none',
-                          boxShadow: '0 20px 40px rgba(0,0,0,0.05)',
-                          padding: '16px'
+                          borderRadius: '12px', 
+                          border: '1px solid #eef2f0',
+                          boxShadow: '0 10px 30px rgba(0,0,0,0.03)',
+                          padding: '12px'
                         }} 
                         itemStyle={{fontFamily: 'Inter', fontWeight: 600, fontSize: '13px'}}
                       />
-                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#8d9484', fontSize: 12}} dy={15} />
+                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#8ea199', fontSize: 11}} dy={10} />
                       <YAxis hide />
                       <Area 
                         type="monotone" 
                         dataKey="clarity" 
-                        stroke="#2c3422" 
-                        strokeWidth={4}
+                        stroke="#3a4541" 
+                        strokeWidth={3}
                         fillOpacity={1} 
                         fill="url(#colorClarity)" 
-                        animationDuration={2000}
+                        animationDuration={1500}
                       />
                       <Area 
                         type="monotone" 
                         dataKey="energy" 
-                        stroke="#8d9484" 
-                        strokeWidth={3}
-                        fillOpacity={1} 
-                        fill="url(#colorEnergy)" 
-                        strokeDasharray="8 8"
-                        animationDuration={2500}
+                        stroke="#8ea199" 
+                        strokeWidth={2}
+                        fill="transparent" 
+                        strokeDasharray="6 6"
+                        animationDuration={1500}
                       />
                     </AreaChart>
                   </ResponsiveContainer>
                 </ChartErrorBoundary>
               ) : (
-                <div className="h-full w-full flex items-center justify-center bg-sage-100/30 rounded-[2rem] border-2 border-dashed border-sage-200">
-                  <p className="text-sage-400 font-serif italic text-lg text-center px-12">"The canvas of your mind awaits its first stroke. Continue reflecting to map your journey."</p>
+                <div className="h-full w-full flex items-center justify-center bg-sage-50/50 rounded-2xl border border-dashed border-sage-100">
+                  <p className="text-sage-400 font-medium text-center px-8">Complete more reflections to see your trends.</p>
                 </div>
               )}
             </div>
@@ -148,21 +143,21 @@ const Analysis = () => {
 
           {/* Theme Distribution */}
           <div className="space-y-8">
-            <h2 className="text-2xl font-display text-sage-900 px-2 flex items-center gap-3">
-              <Sparkles className="text-sage-400" size={24} /> Insight Clusters
+            <h2 className="text-xl font-bold text-sage-900 px-1 flex items-center gap-3">
+              <Sparkles className="text-sage-400" size={20} /> Major Themes
             </h2>
-            <div className="grid grid-cols-1 gap-6">
+            <div className="grid grid-cols-1 gap-5">
               {themes.map((theme, index) => (
-                <GlassCard key={index} delay={index * 0.1} className="p-6 flex flex-col gap-4 group hover:bg-white/60 transition-all">
+                <GlassCard key={index} delay={index * 0.05} className="p-6 flex flex-col gap-3">
                   <div className="flex justify-between items-center">
-                    <span className="font-display text-lg text-sage-900">{theme.title}</span>
-                    <span className="text-[10px] font-bold text-sage-400 uppercase tracking-widest">{theme.weight}% Resonance</span>
+                    <span className="font-bold text-sage-800">{theme.title}</span>
+                    <span className="text-[10px] font-bold text-sage-400 uppercase tracking-widest">{theme.weight}%</span>
                   </div>
-                  <div className="w-full h-1.5 bg-sage-100 rounded-full overflow-hidden">
+                  <div className="w-full h-1 bg-sage-50 rounded-full overflow-hidden">
                     <motion.div 
                       initial={{ width: 0 }}
                       whileInView={{ width: `${theme.weight}%` }}
-                      transition={{ duration: 1.5, ease: "circOut", delay: index * 0.1 }}
+                      transition={{ duration: 1, ease: "easeOut" }}
                       className={`h-full ${theme.color} rounded-full`}
                     />
                   </div>
@@ -170,28 +165,22 @@ const Analysis = () => {
               ))}
             </div>
 
-            <GlassCard className="bg-sage-900 text-white border-none p-10 relative overflow-hidden group mt-4">
-              <div className="absolute top-0 right-0 w-40 h-40 bg-sage-400/20 blur-[60px] rounded-full group-hover:scale-125 transition-transform duration-700" />
-              <h3 className="text-3xl font-display mb-6 flex items-center gap-4 text-sage-100">
-                <Map size={32} className="text-sage-400" /> Thematic Map
+            <GlassCard className="bg-sage-900 text-white border-none p-8 relative overflow-hidden group">
+              <h3 className="text-xl font-bold mb-4 flex items-center gap-3">
+                <Map size={24} className="text-sage-400" /> Current Focus
               </h3>
-              <p className="text-sage-300 font-serif italic text-lg leading-relaxed opacity-90">
-                Your psyche is currently gravitating towards <span className="text-white font-semibold not-italic">Integrity</span> and <span className="text-accent-gold font-semibold not-italic">Purpose</span>.
+              <p className="text-sage-300 font-medium leading-relaxed opacity-90 text-sm">
+                Your recent thoughts align strongly with <span className="text-white font-bold">Resilience</span> and <span className="text-white font-bold">Personal Growth</span>.
               </p>
               
-              <div className="mt-10 flex justify-center">
-                <div className="relative w-40 h-40 flex items-center justify-center">
+              <div className="mt-8 flex justify-center">
+                <div className="relative w-32 h-32 flex items-center justify-center">
                    <motion.div 
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.3, 0.1] }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                    className="absolute inset-0 border-2 border-sage-500 rounded-full" 
+                    animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.2, 0.1] }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                    className="absolute inset-0 border border-sage-600 rounded-full" 
                    />
-                   <motion.div 
-                    animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.4, 0.2] }}
-                    transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
-                    className="absolute inset-6 border border-sage-400 rounded-full" 
-                   />
-                   <Brain className="text-sage-200" size={56} />
+                   <Brain className="text-sage-700" size={40} />
                 </div>
               </div>
             </GlassCard>

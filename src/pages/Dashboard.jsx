@@ -57,19 +57,19 @@ const Dashboard = () => {
       <Navbar />
 
       <main className="flex-1 max-w-7xl mx-auto w-full px-8 py-12">
-        <header className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-          <div className="max-w-2xl">
-            <h1 className="text-5xl font-display text-sage-900 tracking-tight leading-tight mb-4 text-balance">
-              Welcome back, <span className="italic font-serif">{user?.name?.split(' ')[0] || 'Traveler'}</span>.
+        <header className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12">
+          <div className="max-w-xl">
+            <h1 className="text-4xl font-bold text-sage-900 tracking-tight mb-2">
+              Hello, {user?.name?.split(' ')[0] || 'Traveler'}
             </h1>
-            <p className="text-sage-500 font-serif italic text-xl opacity-80">"The journey of growth is paved with reflections."</p>
+            <p className="text-sage-500 font-medium text-lg">Every reflection brings you closer to clarity.</p>
           </div>
-          <div className="flex gap-4">
-            <Button variant="secondary" onClick={handleLogout} className="h-16 w-16 p-0 rounded-2xl flex items-center justify-center">
-              <LogOut size={24} />
+          <div className="flex gap-3">
+            <Button variant="secondary" onClick={handleLogout} className="h-14 w-14 p-0 rounded-xl flex items-center justify-center">
+              <LogOut size={20} />
             </Button>
-            <Button onClick={() => navigate('/journal')} className="h-16 px-8 rounded-2xl shadow-xl shadow-sage-900/10 text-lg">
-              <Plus size={24} className="mr-2" /> New Reflection
+            <Button onClick={() => navigate('/journal')} className="h-14 px-8 rounded-xl shadow-lg text-lg">
+              <Plus size={22} className="mr-2" /> New Entry
             </Button>
           </div>
         </header>
@@ -77,13 +77,13 @@ const Dashboard = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
            <div className="lg:col-span-2 space-y-8">
               {/* Mood Trend Chart */}
-              <GlassCard className="p-8 h-[450px] flex flex-col">
-                <div className="flex items-center justify-between mb-10">
+              <GlassCard className="p-8 h-[400px] flex flex-col">
+                <div className="flex items-center justify-between mb-8">
                   <div>
-                    <h2 className="text-2xl font-display text-sage-900">Mood Evolution</h2>
-                    <p className="text-sage-400 font-serif italic text-sm">Visualizing your emotional landscape over the past week.</p>
+                    <h2 className="text-xl font-bold text-sage-900">Emotional Trends</h2>
+                    <p className="text-sage-400 text-xs font-medium uppercase tracking-widest mt-1">Activity over distance</p>
                   </div>
-                  <TrendingUp className="text-sage-400" size={24} />
+                  <TrendingUp className="text-sage-400" size={20} />
                 </div>
                 
                 <div className="flex-1 w-full">
@@ -91,23 +91,19 @@ const Dashboard = () => {
                     <AreaChart data={analysisData}>
                       <defs>
                         <linearGradient id="colorClarity" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#2c3422" stopOpacity={0.1}/>
-                          <stop offset="95%" stopColor="#2c3422" stopOpacity={0}/>
-                        </linearGradient>
-                        <linearGradient id="colorEnergy" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#8d9484" stopOpacity={0.1}/>
-                          <stop offset="95%" stopColor="#8d9484" stopOpacity={0}/>
+                          <stop offset="5%" stopColor="#313a37" stopOpacity={0.1}/>
+                          <stop offset="95%" stopColor="#313a37" stopOpacity={0}/>
                         </linearGradient>
                       </defs>
-                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e4e6e0" />
-                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#8d9484', fontSize: 12}} dy={10} />
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f2f0" />
+                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#8ea199', fontSize: 11}} dy={10} />
                       <YAxis hide />
                       <Tooltip 
-                        contentStyle={{backgroundColor: 'white', border: 'none', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.05)'}}
+                        contentStyle={{backgroundColor: 'white', border: 'none', borderRadius: '12px', boxShadow: '0 5px 20px rgba(0,0,0,0.05)'}}
                         itemStyle={{fontFamily: 'Inter', fontWeight: 600, fontSize: '13px'}}
                       />
-                      <Area type="monotone" dataKey="clarity" stroke="#2c3422" strokeWidth={3} fillOpacity={1} fill="url(#colorClarity)" />
-                      <Area type="monotone" dataKey="energy" stroke="#8d9484" strokeWidth={3} fillOpacity={1} fill="url(#colorEnergy)" />
+                      <Area type="monotone" dataKey="clarity" stroke="#313a37" strokeWidth={2.5} fillOpacity={1} fill="url(#colorClarity)" />
+                      <Area type="monotone" dataKey="energy" stroke="#8ea199" strokeWidth={2} fill="transparent" strokeDasharray="4 4" />
                     </AreaChart>
                   </ResponsiveContainer>
                 </div>
@@ -118,13 +114,13 @@ const Dashboard = () => {
                   <DailyAffirmation />
                   <div className="grid grid-rows-2 gap-4">
                     {stats.slice(0, 2).map((stat, i) => (
-                      <GlassCard key={i} className="flex items-center gap-6 p-6 group hover:translate-x-1 transition-transform">
-                        <div className={`w-14 h-14 rounded-2xl ${stat.color} flex items-center justify-center shadow-lg shadow-sage-900/5`}>
+                      <GlassCard key={i} className="flex items-center gap-6 p-6 group">
+                        <div className={`w-12 h-12 rounded-xl ${stat.color} flex items-center justify-center shadow-lg shadow-sage-900/5`}>
                           {stat.icon}
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-sage-400 uppercase tracking-widest mb-1">{stat.label}</p>
-                          <p className="text-2xl font-display text-sage-900">{stat.value}</p>
+                          <p className="text-[10px] font-bold text-sage-400 uppercase tracking-widest mb-1">{stat.label}</p>
+                          <p className="text-xl font-bold text-sage-900">{stat.value}</p>
                         </div>
                       </GlassCard>
                     ))}
@@ -135,56 +131,55 @@ const Dashboard = () => {
            {/* Sidebar: Recent Reflections & Insight of the Day */}
            <div className="space-y-8">
               <section className="space-y-6">
-                <div className="flex items-center justify-between px-2">
-                  <h2 className="text-2xl font-display text-sage-900">Recent Reflections</h2>
-                  <button onClick={() => navigate('/journal')} className="text-sage-400 font-serif italic hover:text-sage-800 flex items-center gap-1 transition-colors">
-                    View Journal <ArrowRight size={16} />
+                <div className="flex items-center justify-between px-1">
+                  <h2 className="text-xl font-bold text-sage-900">Past Entries</h2>
+                  <button onClick={() => navigate('/journal')} className="text-sage-400 font-medium text-sm hover:text-sage-800 flex items-center gap-1 transition-colors">
+                    Journal <ArrowRight size={14} />
                   </button>
                 </div>
                 
                 <div className="space-y-4">
                   {loading ? (
-                    [1,2,3].map(i => <div key={i} className="h-20 animate-pulse glass rounded-3xl" />)
+                    [1,2,3].map(i => <div key={i} className="h-16 animate-pulse glass rounded-2xl" />)
                   ) : entries.length > 0 ? (
                     entries.map((entry, index) => (
                       <GlassCard 
                         key={index} 
-                        delay={index * 0.1} 
-                        className="group cursor-pointer hover:bg-white/60 transition-all border-sage-100/50"
+                        delay={index * 0.05} 
+                        className="group cursor-pointer hover:bg-white/80 transition-all border-sage-50/50 p-5"
                         onClick={() => navigate('/analysis')}
                       >
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-[10px] font-bold text-sage-400 uppercase tracking-tighter">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-[10px] font-bold text-sage-400 uppercase tracking-widest">
                             {new Date(entry.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
                           </span>
-                          <span className="text-[10px] font-bold text-sage-800 bg-sage-100 px-2 py-0.5 rounded-full uppercase tracking-tighter">
+                          <span className="text-[9px] font-bold text-sage-700 bg-sage-50 px-2 py-0.5 rounded-full uppercase">
                             {entry.sentiment || 'Reflective'}
                           </span>
                         </div>
-                        <h3 className="font-serif italic text-sage-900 group-hover:text-sage-950 transition-colors line-clamp-1">
+                        <h3 className="font-medium text-sage-800 group-hover:text-sage-950 transition-colors line-clamp-1 text-sm">
                           {entry.content}
                         </h3>
                       </GlassCard>
                     ))
                   ) : (
-                    <div className="p-12 text-center glass rounded-[2.5rem] border-dashed border-sage-200">
-                      <p className="text-sage-400 font-serif italic">Your story begins here.</p>
+                    <div className="py-12 text-center glass rounded-3xl border-dashed border-sage-100">
+                      <p className="text-sage-400 text-sm font-medium">Your journey starts with a word.</p>
                     </div>
                   )}
                 </div>
               </section>
 
               <GlassCard className="bg-sage-900 text-white p-8 border-none relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-sage-400/20 blur-[50px] rounded-full" />
                 <div className="relative z-10 h-full flex flex-col justify-between">
-                  <div className="mb-8">
-                    <h3 className="text-2xl font-display mb-4 text-sage-100">Reflection Insight</h3>
-                    <p className="text-sage-400 font-serif italic leading-relaxed text-lg">
-                      "You seem to be navigating a period of significant Resilience. Your recent journal entries suggest a growing sense of inner equilibrium."
+                  <div className="mb-6">
+                    <h3 className="text-xl font-bold mb-3 text-white">Daily Pattern</h3>
+                    <p className="text-sage-400 font-medium leading-relaxed text-sm">
+                      "You've shown significant resilience lately. Keep focusing on your progress."
                     </p>
                   </div>
-                  <Button variant="ghost" onClick={() => navigate('/analysis')} className="text-sage-300 hover:text-white border-sage-800 p-0 h-auto justify-start self-start group-hover:translate-x-2 transition-transform">
-                    Unlock deeper analysis <ArrowRight size={18} className="ml-2" />
+                  <Button variant="ghost" onClick={() => navigate('/analysis')} className="text-sage-300 hover:text-white border-none p-0 h-auto justify-start self-start transition-all">
+                    Full Analysis <ArrowRight size={16} className="ml-2" />
                   </Button>
                 </div>
               </GlassCard>
