@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Camera, Menu, X, Wind } from 'lucide-react';
+import { Sparkles, Menu, X, Wind } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from './Button.jsx';
@@ -21,7 +21,7 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto glass rounded-[2rem] px-8 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3 cursor-pointer group">
             <div className="w-12 h-12 bg-sage-900 rounded-2xl flex items-center justify-center text-sage-50 group-hover:rotate-12 transition-transform">
-              <Camera size={24} />
+              <Sparkles size={24} />
             </div>
             <span className="text-2xl font-display tracking-tight text-sage-900">PsycheLens</span>
           </Link>
